@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Web Portal</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+  <main class="main-content container">
+    <section class="welcome">
+      <h2>Welcome to Our Site!</h2>
+      <p>Stay tuned for exciting upcoming events and updates. We're glad you're here.</p>
+    </section>
+
+    <section class="events-placeholder">
+      <h3>Upcoming Events</h3>
+      <!-- If there's any event data, display it -->
+      <% if (events && events.length > 0) { %>
+        <ul>
+          <% events.forEach(event => { %>
+            <li>
+              <strong><%= event.title %></strong> - <%= event.date %> at <%= event.location %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="placeholder">Content coming soon</p>
+      <% } %>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
