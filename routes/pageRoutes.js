@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { sendEmail } = require('../utils/mailer');
-const events = require('../data/events'); // 👈 import from new file
+const events = require('../data/events');
 
 // Home
 router.get('/', (req, res) => {
