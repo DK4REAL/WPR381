@@ -114,3 +114,40 @@ a {
   font-size: 0.9rem;
   color: #777777;
 }
+.team-section {
+      margin-top: 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      background-color: #1c1c1c;
+      border: 1px solid #333;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      padding: 1rem;
+    }
+    .team-member img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .team-member h4 {
+      margin-bottom: 0.5rem;
+      color: #f0f0f0;
+    }
+
+    .team-member p {
+      font-size: 0.9rem;
+      color: #c0c0c0;
+    }
