@@ -1,28 +1,16 @@
-// routes/pageRoutes.js
 const express = require('express');
 const router = express.Router();
-const { sendEmail } = require('../utils/mailer'); // Import the sendEmail function
+const { sendEmail } = require('../utils/mailer');
+const events = require('../data/events'); // 👈 import from new file
 
-// Mock event data (you can replace this with real DB data later)
-const events = [
-  {
-    title: 'Launch Party',
-    date: '2025-06-01',
-    location: 'Cape Town'
-  },
-  {
-    title: 'Tech Talk Tuesday',
-    date: '2025-06-10',
-    location: 'Online'
-  }
-];
-
-// Home Page
+// Home
 router.get('/', (req, res) => {
-  res.render('pages/home', {
-    title: 'Home',
-    events
-  });
+  res.render('pages/home', { title: 'Home', events });
+});
+
+// Events
+router.get('/events', (req, res) => {
+  res.render('pages/events', { title: 'Events', events });
 });
 
 // Contact Page (GET)

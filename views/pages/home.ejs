@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-    <%- include('../partials/header') %>
+  <%- include('../partials/header') %>
 
   <main class="main-content container">
     <section class="welcome">
@@ -17,10 +17,12 @@
 
     <section class="events-placeholder">
       <h3>Upcoming Events</h3>
-      <!-- If there's any event data, display it -->
       <% if (events && events.length > 0) { %>
         <ul>
-          <% events.forEach(event => { %>
+          <% events
+              .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort by date ascending
+              .slice(0, 3) // Take only first 3
+              .forEach(event => { %>
             <li>
               <strong><%= event.title %></strong> - <%= event.date %> at <%= event.location %>
             </li>
