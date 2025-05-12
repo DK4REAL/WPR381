@@ -18,7 +18,10 @@ const pageRoutes = require('./routes/pageRoutes');
 app.use('/', pageRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+if (!PORT) {
+  throw new Error('PORT is not defined in the environment variables.');
+}
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
