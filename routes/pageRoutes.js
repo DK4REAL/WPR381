@@ -1,45 +1,67 @@
 const express = require('express');
 const router = express.Router();
 const { sendEmail } = require('../utils/mailer');
-const events = require('../data/events');
 
-// Home
+// Import data
+const events = require('../data/events');
+const teamMembers = require('../data/about');
+
+// Home Page
 router.get('/', (req, res) => {
-  res.render('pages/home', { title: 'Home', events });
+  res.render('pages/home', {
+    title: 'Home',
+    events
+  });
 });
 
-// Events
+// Events Page
 router.get('/events', (req, res) => {
-  res.render('pages/events', { title: 'Events', events });
+  res.render('pages/events', {
+    title: 'Events',
+    events
+  });
 });
 
 // Contact Page (GET)
+const contactMessages = [];
 router.get('/contact', (req, res) => {
-  res.render('pages/contact', { title: 'Contact' });
+  res.render('pages/contact', {
+    title: 'Contact'
+  });
 });
 
-// Contact Page (POST - form submission)
+// Contact Page (POST - Form Submission)
 router.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
-  console.log('Form submitted:', { name, email, message });
 
-  // Send email to the admin or the team
+  // Store the form submission in memory for the current session
+  contactMessages.push({ name, email, message, date: new Date() });
+
+  // Attempt to send a confirmation email to the user
   sendEmail(name, email, message)
     .then(info => {
-      console.log('Email sent: ' + info.response);
-      
-      // After sending the email, render the Thank You page with the name
-      res.render('pages/thankyou', { title: 'Thank You', name });
+      console.log('Email sent:', info.response);
+
+      // Render a thank you page after successful email delivery
+      res.render('pages/thankyou', {
+        title: 'Thank You',
+        name
+      });
     })
     .catch(error => {
-      console.log('Error sending email:', error);
+      console.error('Error sending email:', error);
+
+      // Handle errors gracefully
       res.status(500).send('Something went wrong, please try again later.');
     });
 });
 
-// About Page (GET)
+// About Page
 router.get('/about', (req, res) => {
-  res.render('pages/about', { title: 'About' });
+  res.render('pages/about', {
+    title: 'About',
+    teamMembers
+  });
 });
 
 module.exports = router;
