@@ -27,7 +27,7 @@ Description
 ## how to enter dev mode
 -npm run dev
 
-## credentials for the emial
+## credentials for the email service
 -EMAIL_USER=wpr381group5@gmail.com
 -EMAIL_PASS=cutj bhkl hwyx bqch
 -EMAIL_SERVICE=gmail
